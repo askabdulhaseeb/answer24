@@ -17,6 +17,7 @@ class CustomTextFormField extends StatefulWidget {
     this.maxLength,
     this.prefixIcon,
     this.showSuffixIcon = true,
+    this.suffixIcon,
     this.readOnly = false,
     this.autoFocus = false,
     this.textAlign = TextAlign.start,
@@ -31,6 +32,7 @@ class CustomTextFormField extends StatefulWidget {
   final void Function(String)? onChanged;
   final Widget? prefixIcon;
   final bool showSuffixIcon;
+  final Widget? suffixIcon;
   final String? Function(String? value)? validator;
   final EdgeInsetsGeometry? contentPadding;
   final int? minLines;
@@ -99,17 +101,18 @@ class CustomTextFormFieldState extends State<CustomTextFormField> {
           hintStyle: widget.hint!.length > 15
               ? TextStyle(fontSize: 14, color: Colors.grey.shade400)
               : TextStyle(fontSize: 15, color: Colors.grey.shade400),
-          suffixIcon: (widget._controller!.text.isEmpty ||
-                  !widget.showSuffixIcon ||
-                  widget.showSuffixIcon == false)
-              ? null
-              : IconButton(
-                  splashRadius: 16,
-                  onPressed: () => setState(() {
-                    widget._controller!.clear();
-                  }),
-                  icon: const Icon(CupertinoIcons.clear, size: 18),
-                ),
+          suffixIcon: widget.suffixIcon ??
+              ((widget._controller!.text.isEmpty ||
+                      !widget.showSuffixIcon ||
+                      widget.showSuffixIcon == false)
+                  ? null
+                  : IconButton(
+                      splashRadius: 16,
+                      onPressed: () => setState(() {
+                        widget._controller!.clear();
+                      }),
+                      icon: const Icon(CupertinoIcons.clear, size: 18),
+                    )),
           focusColor: Theme.of(context).primaryColor,
           // border: widget.border ?? InputBorder.none,
         ),

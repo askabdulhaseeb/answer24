@@ -1,3 +1,4 @@
+import 'package:answer24/views/user_screens/edit_user_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:provider/single_child_widget.dart';
@@ -13,4 +14,7 @@ final List<SingleChildWidget> myProviders = [
 final Map<String, WidgetBuilder> myRoutes = <String, WidgetBuilder>{
   SignInScreen.routeName: (_) => const SignInScreen(),
   DashboardScreen.routeName: (_) => const DashboardScreen(),
+
+  // User Screen
+  EditUserScreen.routeName:(_)=>const EditUserScreen(),
 };

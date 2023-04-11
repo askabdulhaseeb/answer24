@@ -6,11 +6,13 @@ class PasswordTextFormField extends StatefulWidget {
   const PasswordTextFormField({
     required TextEditingController controller,
     this.textInputAction = TextInputAction.done,
+    this.title = 'Password',
     Key? key,
   })  : _controller = controller,
         super(key: key);
   final TextEditingController _controller;
   final TextInputAction? textInputAction;
+  final String title;
   @override
   PasswordTextFormFieldState createState() => PasswordTextFormFieldState();
 }
@@ -43,7 +45,7 @@ class PasswordTextFormFieldState extends State<PasswordTextFormField> {
         cursorColor: Theme.of(context).colorScheme.secondary,
         validator: (String? value) => CustomValidator.password(value),
         decoration: InputDecoration(
-          labelText: 'Password',
+          labelText: widget.title,
           hintText: '..........',
           hintStyle: TextStyle(fontSize: 15, color: Colors.grey.shade400),
           suffixIcon: IconButton(
