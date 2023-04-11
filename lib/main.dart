@@ -1,5 +1,8 @@
-import 'package:answer24/views/auth/signin_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import 'package:answer24/views/auth/signin_screen.dart';
+import 'basics.dart';
 
 void main() {
   runApp(const MyApp());
@@ -10,15 +13,16 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
+    return MultiProvider(
+      providers: myProviders,
+      child: MaterialApp(
+        title: 'Answer24',
+        theme: ThemeData(
+          primarySwatch: Colors.blue,
+        ),
+        home: const SignInScreen(),
+        routes: myRoutes,
       ),
-      home: const SignInScreen(),
-      routes: <String, WidgetBuilder>{
-        SignInScreen.routeName: (_) => const SignInScreen(),
-      },
     );
   }
 }
