@@ -9,7 +9,7 @@ class DashboardScreen extends StatelessWidget {
   static const String routeName = '/dashboard';
   @override
   Widget build(BuildContext context) {
-    const List<Widget> _pages = <Widget>[
+    const List<Widget> pages = <Widget>[
       Text('Chat Page'),
       Text('Call'),
       Text('Camera'),
@@ -17,7 +17,7 @@ class DashboardScreen extends StatelessWidget {
     ];
     return Scaffold(
       body: Consumer<AppProvider>(builder: (context, appPro, _) {
-        return Center(child: _pages[appPro.currentTap]);
+        return Center(child: pages[appPro.currentTap]);
       }),
       bottomNavigationBar: const MainBottomNavBar(),
     );

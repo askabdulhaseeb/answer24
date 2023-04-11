@@ -1,3 +1,4 @@
+import 'package:answer24/views/dashboard/dashboard_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -20,7 +21,7 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
-        home: const SignInScreen(),
+        home: const DashboardScreen(),
         routes: myRoutes,
       ),
     );
