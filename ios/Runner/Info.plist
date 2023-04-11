@@ -51,5 +51,7 @@
 			<string>sms</string>
 			<string>tel</string>
 		</array>
+		<key>UIStatusBarHidden</key>
+		<false/>
 	</dict>
 </plist>
