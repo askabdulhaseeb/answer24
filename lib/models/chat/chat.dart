@@ -1,4 +1,4 @@
-import 'package:answer24/functions/unique_funcation.dart';
+import 'package:answer24/functions/unique_function.dart';
 import 'package:answer24/models/chat/message/message.dart';
 import 'package:answer24/utilities/app_image.dart';
 
@@ -15,7 +15,7 @@ class Chat {
                   'Lorem ipsum is placeholder text commonly used in the graphic',
             ),
         unseenMessages = unseenMessages ?? [],
-        chatID = chatID ?? UniqueFuncation.chatID;
+        chatID = chatID ?? UniqueFunction.chatID;
   final String chatID;
   final String imageURL;
   final String title;
@@ -23,7 +23,7 @@ class Chat {
   final List<Message> unseenMessages;
 }
 
-List<Chat> chasts = [
+List<Chat> dummyChatLists = [
   Chat(title: 'Deirdre Jhon', imageURL: AppImages.dummyURL, unseenMessages: [
     Message(text: 'text'),
     Message(text: 'text'),

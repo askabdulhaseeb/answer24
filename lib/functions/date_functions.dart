@@ -94,4 +94,32 @@ class DateFunctions {
     }
     return time;
   }
+
+  static String timeForChat(DateTime value) {
+    DateTime now = DateTime.now();
+    Duration diff = value.difference(now);
+    String time = '';
+
+    int inSec = diff.inSeconds.abs();
+    int inHour = diff.inHours.abs();
+    int inDays = diff.inDays.abs();
+
+    if (inSec <= 0 || inSec > 0 && inHour < 24) {
+      time = timeInDigits(value);
+    } else if (inDays > 0 && inDays < 235) {
+      DateFormat format = DateFormat.MMM();
+      time = '${format.format(value)} ${timeInDigits(value)}';
+    } else {
+      double temp = (diff.inDays.abs() / 365);
+
+      if (temp < 1.5) {
+        time = '${temp.toStringAsFixed(0)} year ago';
+      } else {
+        time = '${temp.toStringAsFixed(0)} years ago';
+      }
+      DateFormat format = DateFormat.yMEd();
+      time = format.format(value);
+    }
+    return time;
+  }
 }

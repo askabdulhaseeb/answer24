@@ -1,4 +1,4 @@
-import 'package:answer24/functions/url_funcation.dart';
+import 'package:answer24/functions/url_function.dart';
 import 'package:answer24/utilities/app_image.dart';
 import 'package:answer24/utilities/custom_validator.dart';
 import 'package:answer24/views/dashboard/dashboard_screen.dart';
@@ -80,7 +80,7 @@ class _SignInScreenState extends State<SignInScreen> {
                           recognizer: TapGestureRecognizer()
                             ..onTap = () async {
                               try {
-                                await UrlFuncation()
+                                await UrlFunction()
                                     .lunchStringURL(Utilities.signUpURL);
                               } catch (e) {
                                 if (kDebugMode) {

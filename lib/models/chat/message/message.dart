@@ -1,5 +1,5 @@
 import '../../../enums/chat/message_type_enum.dart';
-import '../../../functions/unique_funcation.dart';
+import '../../../functions/unique_function.dart';
 import 'message_attachment.dart';
 import 'message_read_info.dart';
 
@@ -13,7 +13,7 @@ class Message {
     List<MessageReadInfo>? sendTo,
     DateTime? time,
     this.replyOf,
-  })  : messageID = messageID ?? UniqueFuncation.messageID,
+  })  : messageID = messageID ?? UniqueFunction.messageID,
         type = type ?? MessageTypeEnum.text,
         attachment = attachment ?? <MessageAttachment>[],
         sendBy = sendBy ?? 'sendBy',
