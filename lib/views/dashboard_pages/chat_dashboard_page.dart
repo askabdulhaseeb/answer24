@@ -1,0 +1,54 @@
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+
+class ChatDashboardPage extends StatelessWidget {
+  const ChatDashboardPage({Key? key}) : super(key: key);
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        leading: TextButton(
+          onPressed: () {},
+          child: const Text(
+            'Edit',
+            style: TextStyle(color: Colors.white),
+          ),
+        ),
+        title: const Text('Chats'),
+        actions: [
+          IconButton(
+            onPressed: () {},
+            icon: const Icon(Icons.perm_contact_calendar_rounded),
+          ),
+        ],
+      ),
+      body: Column(
+        children: <Widget>[
+          Container(
+            padding: const EdgeInsets.symmetric(vertical: 6),
+            decoration: BoxDecoration(
+              color: Theme.of(context).primaryColor.withOpacity(0.1),
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Icon(
+                  CupertinoIcons.search,
+                  color: Theme.of(context).primaryColor.withOpacity(0.4),
+                ),
+                const SizedBox(width: 8),
+                Text(
+                  'Search for messages or users',
+                  style: TextStyle(
+                    color: Theme.of(context).primaryColor.withOpacity(0.6),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          
+        ],
+      ),
+    );
+  }
+}

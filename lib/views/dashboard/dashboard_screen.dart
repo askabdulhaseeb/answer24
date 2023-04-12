@@ -3,6 +3,7 @@ import 'package:answer24/views/dashboard_pages/profile_page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../dashboard_pages/chat_dashboard_page.dart';
 import 'main_bottom_nav_bar.dart';
 
 class DashboardScreen extends StatelessWidget {
@@ -11,7 +12,7 @@ class DashboardScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     const List<Widget> pages = <Widget>[
-      Text('Chat Page'),
+      ChatDashboardPage(),
       Text('Call'),
       Text('Camera'),
       ProfilePage(),
