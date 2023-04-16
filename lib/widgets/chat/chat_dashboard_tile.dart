@@ -1,4 +1,5 @@
 import 'package:answer24/functions/date_functions.dart';
+import 'package:answer24/views/chat/personal_chat_screen.dart';
 import 'package:flutter/material.dart';
 
 import '../../models/chat/chat.dart';
@@ -10,6 +11,9 @@ class ChatDashboardTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
+      onTap: () => Navigator.of(context).push(MaterialPageRoute(
+        builder: (context) => PersonalChatScreen(chatID: chat.chatID),
+      )),
       leading: CircleAvatar(backgroundImage: NetworkImage(chat.imageURL)),
       title: Text(chat.title),
       subtitle: Row(
@@ -29,7 +33,10 @@ class ChatDashboardTile extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         crossAxisAlignment: CrossAxisAlignment.end,
         children: <Widget>[
-          Text(DateFunctions.timeForChat(chat.lastMessage.time)),
+          Text(
+            DateFunctions.timeForChat(chat.lastMessage.time),
+            style: const TextStyle(color: Colors.grey, fontSize: 11),
+          ),
           chat.unseenMessages.isEmpty
               ? const SizedBox(height: 10)
               : CircleAvatar(

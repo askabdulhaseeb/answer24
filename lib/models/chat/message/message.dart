@@ -1,3 +1,5 @@
+import 'package:answer24/utilities/app_image.dart';
+
 import '../../../enums/chat/message_type_enum.dart';
 import '../../../functions/unique_function.dart';
 import 'message_attachment.dart';
@@ -62,3 +64,33 @@ class Message {
     );
   }
 }
+
+List<Message> listOfMessage = [
+  Message(text: 'This is the First Message'),
+  Message(
+    text: 'This is the message with 6 photos',
+    type: MessageTypeEnum.image,
+    attachment: [
+      MessageAttachment(url: AppImages.dummyURL, type: MessageTypeEnum.image),
+      MessageAttachment(url: AppImages.dummyURL, type: MessageTypeEnum.image),
+      MessageAttachment(url: AppImages.dummyURL, type: MessageTypeEnum.image),
+      MessageAttachment(url: AppImages.dummyURL, type: MessageTypeEnum.image),
+      MessageAttachment(url: AppImages.dummyURL, type: MessageTypeEnum.image),
+      MessageAttachment(url: AppImages.dummyURL, type: MessageTypeEnum.image),
+    ],
+  ),
+  Message(text: 'Message'),
+  Message(
+    text: 'You miss the call from helper',
+    type: MessageTypeEnum.announcement,
+  ),
+  Message(text: 'Message is here to tell you about nothing 😂'),
+  Message(
+    text: '',
+    type: MessageTypeEnum.image,
+    attachment: [
+      MessageAttachment(url: AppImages.dummyURL, type: MessageTypeEnum.image),
+      MessageAttachment(url: AppImages.dummyURL, type: MessageTypeEnum.image),
+    ],
+  ),
+];
