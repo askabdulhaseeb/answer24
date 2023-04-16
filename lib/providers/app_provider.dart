@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 
 class AppProvider extends ChangeNotifier {
-  int _currentIndex = kDebugMode ? 0 : 0;
+  int _currentIndex = kDebugMode ? 1 : 0;
   bool _isMute = true;
   void onTabTapped(int index) {
     _currentIndex = index;
