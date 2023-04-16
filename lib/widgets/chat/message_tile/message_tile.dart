@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:answer24/models/chat/message/message.dart';
 import 'package:flutter/material.dart';
 
@@ -7,13 +9,13 @@ import 'announcement_message_tile.dart';
 import 'attachment_message_tile.dart';
 
 class MessageTile extends StatelessWidget {
-  const MessageTile({required this.message, this.isMe = false, super.key});
+  const MessageTile({required this.message, super.key});
   final Message message;
-  final bool isMe;
 
   @override
   Widget build(BuildContext context) {
-    const double _borderRadius = 12;
+    const double borderRadius = 12;
+    final bool isMe = Random.secure().nextInt(2) == 1;
     return message.type == MessageTypeEnum.announcement
         ? AnnouncementMessageTile(text: message.text)
         : Row(
@@ -21,11 +23,11 @@ class MessageTile extends StatelessWidget {
                 isMe ? MainAxisAlignment.end : MainAxisAlignment.start,
             children: <Widget>[
               ClipRRect(
-                borderRadius: BorderRadius.circular(_borderRadius),
+                borderRadius: BorderRadius.circular(borderRadius),
                 child: Container(
                   margin: const EdgeInsets.all(6),
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(_borderRadius),
+                    borderRadius: BorderRadius.circular(borderRadius),
                     boxShadow: <BoxShadow>[
                       BoxShadow(
                         color: Colors.grey.withOpacity(0.5),
@@ -52,7 +54,7 @@ class MessageTile extends StatelessWidget {
                             if (message.attachment.isNotEmpty)
                               AttachmentMessageTile(
                                 isMe: isMe,
-                                borderRadius: _borderRadius,
+                                borderRadius: borderRadius,
                                 attachments: message.attachment,
                               ),
                             if (message.text != null &&

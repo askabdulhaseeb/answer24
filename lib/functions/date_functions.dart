@@ -31,6 +31,22 @@ class DateFunctions {
     return format.format(value);
   }
 
+  static String chatMessageDate(DateTime value) {
+    DateTime now = DateTime.now();
+    if (now.day == value.day &&
+        now.month == value.month &&
+        now.year == value.year) {
+      return 'Today';
+    }
+    if ((now.day - 1) == value.day &&
+        now.month == value.month &&
+        now.year == value.year) {
+      return 'Yesterday';
+    }
+    return DateFormat.yMMMEd().format(value);
+  }
+
+
   static String timeInWords(DateTime value) {
     DateTime now = DateTime.now();
     Duration diff = value.difference(now);
