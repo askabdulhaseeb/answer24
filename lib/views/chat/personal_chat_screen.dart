@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:answer24/models/app_user.dart';
+import 'package:answer24/models/chat/chat.dart';
 import 'package:answer24/models/chat/message/message.dart';
 import 'package:answer24/widgets/chat/message_tile/message_tile.dart';
 import 'package:answer24/widgets/custom/show_loading.dart';
@@ -9,6 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:grouped_list/grouped_list.dart';
 
 import '../../functions/date_functions.dart';
+import '../../widgets/chat/chat_text_form_field/chat_text_field.dart';
 
 class PersonalChatScreen extends StatelessWidget {
   const PersonalChatScreen({required this.chatID, Key? key}) : super(key: key);
@@ -42,57 +44,67 @@ class PersonalChatScreen extends StatelessWidget {
                 onPressed: () {}, icon: const Icon(CupertinoIcons.phone)),
           ],
         ),
-        body: StreamBuilder(
-          stream: fetchChat(chatID),
-          builder: (context, snapshot) {
-            if (snapshot.hasError) {
-              return const Text('Something going wrong');
-            }
-            // else if (snapshot.hasData) {
-            else {
-              final List<Message> messages = listOfMessage;
-              return GroupedListView<Message, String>(
-                shrinkWrap: true,
-                primary: false,
-                reverse: true,
-                useStickyGroupSeparators: true,
-                elements: messages,
-                groupBy: (Message element) =>
-                    DateFunctions.chatMessageDate(element.time),
-                groupHeaderBuilder: (Message element) {
-                  return Container(
-                    color: Theme.of(context).cardColor,
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        Container(
-                          constraints: const BoxConstraints(minWidth: 50),
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 16, vertical: 8),
-                          margin: const EdgeInsets.symmetric(vertical: 8),
-                          decoration: BoxDecoration(
-                            color: const Color(0xffA1D6ED),
-                            borderRadius: BorderRadius.circular(20),
+        body: Column(
+          children: <Widget>[
+            Expanded(
+              child: StreamBuilder(
+                stream: fetchChat(chatID),
+                builder: (context, snapshot) {
+                  if (snapshot.hasError) {
+                    return const Text('Something going wrong');
+                  }
+                  // else if (snapshot.hasData) {
+                  else {
+                    final List<Message> messages = listOfMessage;
+                    return GroupedListView<Message, String>(
+                      shrinkWrap: true,
+                      primary: false,
+                      reverse: true,
+                      useStickyGroupSeparators: true,
+                      elements: messages,
+                      groupBy: (Message element) =>
+                          DateFunctions.chatMessageDate(element.time),
+                      groupHeaderBuilder: (Message element) {
+                        return Container(
+                          color: Theme.of(context).cardColor,
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[
+                              Container(
+                                constraints: const BoxConstraints(minWidth: 50),
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 16, vertical: 8),
+                                margin: const EdgeInsets.symmetric(vertical: 8),
+                                decoration: BoxDecoration(
+                                  color: const Color(0xffA1D6ED),
+                                  borderRadius: BorderRadius.circular(20),
+                                ),
+                                child: Text(
+                                  DateFunctions.chatMessageDate(element.time),
+                                  style: const TextStyle(color: Colors.white),
+                                ),
+                              ),
+                            ],
                           ),
-                          child: Text(
-                            DateFunctions.chatMessageDate(element.time),
-                            style: const TextStyle(color: Colors.white),
-                          ),
-                        ),
-                      ],
-                    ),
-                  );
+                        );
+                      },
+                      itemBuilder: (BuildContext context, Message msg) {
+                        return MessageTile(message: msg);
+                      },
+                    );
+                  }
+                  // else {
+                  //   return const ShowLoading();
+                  // }
                 },
-                itemBuilder: (BuildContext context, Message msg) {
-                  return MessageTile(message: msg);
-                },
-              );
-            }
-            // else {
-            //   return const ShowLoading();
-            // }
-          },
+              ),
+            ),
+            ChatTextField(
+              chat: Chat(title: 'chat', imageURL: ''),
+              onStartRecoding: () {},
+            ),
+          ],
         ));
   }
 }
