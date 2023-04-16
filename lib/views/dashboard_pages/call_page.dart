@@ -52,14 +52,17 @@ class CallPage extends StatelessWidget {
                 children: <Widget>[
                   CallOptionButtonWidget(
                     icon: CupertinoIcons.videocam_fill,
+                    isSelected: false,
                     onTap: () {},
                   ),
                   CallOptionButtonWidget(
                     icon: CupertinoIcons.add,
+                    isSelected: false,
                     onTap: () {},
                   ),
                   CallOptionButtonWidget(
                     icon: CupertinoIcons.pencil_ellipsis_rectangle,
+                    isSelected: true,
                     onTap: () {},
                   ),
                 ],
@@ -70,14 +73,17 @@ class CallPage extends StatelessWidget {
                 children: <Widget>[
                   CallOptionButtonWidget(
                     icon: CupertinoIcons.mic_slash,
+                    isSelected: false,
                     onTap: () {},
                   ),
                   CallOptionButtonWidget(
                     icon: CupertinoIcons.pause_circle,
+                    isSelected: false,
                     onTap: () {},
                   ),
                   CallOptionButtonWidget(
                     icon: CupertinoIcons.recordingtape,
+                    isSelected: true,
                     onTap: () {},
                   ),
                 ],
