@@ -1,12 +1,11 @@
 import 'package:answer24/models/app_user.dart';
-import 'package:answer24/utilities/app_image.dart';
 import 'package:answer24/utilities/utilities.dart';
 import 'package:answer24/widgets/call/call_option_button_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class CallPage extends StatelessWidget {
-  const CallPage({super.key});
+class CallScreen extends StatelessWidget {
+  const CallScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

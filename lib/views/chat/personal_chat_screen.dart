@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:answer24/models/app_user.dart';
 import 'package:answer24/models/chat/chat.dart';
 import 'package:answer24/models/chat/message/message.dart';
+import 'package:answer24/views/chat/call_screen.dart';
 import 'package:answer24/widgets/chat/message_tile/message_tile.dart';
 import 'package:answer24/widgets/custom/show_loading.dart';
 import 'package:flutter/cupertino.dart';
@@ -38,10 +39,20 @@ class PersonalChatScreen extends StatelessWidget {
           ),
           actions: <Widget>[
             IconButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => const CallScreen(),
+                  ));
+                },
                 icon: const Icon(CupertinoIcons.video_camera)),
             IconButton(
-                onPressed: () {}, icon: const Icon(CupertinoIcons.phone)),
+              onPressed: () {
+                Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context) => const CallScreen(),
+                ));
+              },
+              icon: const Icon(CupertinoIcons.phone),
+            ),
           ],
         ),
         body: Column(
@@ -61,32 +72,35 @@ class PersonalChatScreen extends StatelessWidget {
                       primary: false,
                       reverse: true,
                       useStickyGroupSeparators: true,
+                      clipBehavior: Clip.none,
+                      keyboardDismissBehavior:
+                          ScrollViewKeyboardDismissBehavior.onDrag,
                       elements: messages,
                       groupBy: (Message element) =>
                           DateFunctions.chatMessageDate(element.time),
                       groupHeaderBuilder: (Message element) {
-                        return Container(
-                          color: Theme.of(context).cardColor,
-                          child: Row(
-                            mainAxisSize: MainAxisSize.min,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: <Widget>[
-                              Container(
-                                constraints: const BoxConstraints(minWidth: 50),
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 16, vertical: 8),
-                                margin: const EdgeInsets.symmetric(vertical: 8),
-                                decoration: BoxDecoration(
-                                  color: const Color(0xffA1D6ED),
-                                  borderRadius: BorderRadius.circular(20),
-                                ),
-                                child: Text(
-                                  DateFunctions.chatMessageDate(element.time),
-                                  style: const TextStyle(color: Colors.white),
-                                ),
+                        return Row(
+                          mainAxisSize: MainAxisSize.min,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            Container(
+                              constraints: const BoxConstraints(minWidth: 50),
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 16, vertical: 4),
+                              margin: const EdgeInsets.symmetric(vertical: 8),
+                              decoration: BoxDecoration(
+                                color: Theme.of(context)
+                                    .primaryColor
+                                    .withOpacity(0.1),
+                                borderRadius: BorderRadius.circular(20),
                               ),
-                            ],
-                          ),
+                              child: Text(
+                                DateFunctions.chatMessageDate(element.time),
+                                style: TextStyle(
+                                    color: Theme.of(context).primaryColor),
+                              ),
+                            ),
+                          ],
                         );
                       },
                       itemBuilder: (BuildContext context, Message msg) {
