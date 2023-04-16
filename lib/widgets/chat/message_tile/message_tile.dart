@@ -14,7 +14,7 @@ class MessageTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const double borderRadius = 12;
+    const double borderRadius = 4;
     final bool isMe = Random.secure().nextInt(2) == 1;
     return message.type == MessageTypeEnum.announcement
         ? AnnouncementMessageTile(text: message.text)
@@ -22,71 +22,80 @@ class MessageTile extends StatelessWidget {
             mainAxisAlignment:
                 isMe ? MainAxisAlignment.end : MainAxisAlignment.start,
             children: <Widget>[
-              ClipRRect(
-                borderRadius: BorderRadius.circular(borderRadius),
-                child: Container(
-                  margin: const EdgeInsets.all(6),
-                  decoration: BoxDecoration(
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: <Widget>[
+                  ClipRRect(
                     borderRadius: BorderRadius.circular(borderRadius),
-                    boxShadow: <BoxShadow>[
-                      BoxShadow(
-                        color: Colors.grey.withOpacity(0.5),
-                        spreadRadius: 1,
-                        blurRadius: 6,
-                        offset: const Offset(1, 1),
+                    child: Container(
+                      margin: const EdgeInsets.all(8),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(borderRadius),
+                        boxShadow: <BoxShadow>[
+                          BoxShadow(
+                            color: Colors.grey.withOpacity(0.5),
+                            spreadRadius: 1,
+                            blurRadius: 6,
+                            offset: const Offset(1, 1),
+                          ),
+                        ],
+                        color: isMe
+                            ? Theme.of(context).primaryColor
+                            : Theme.of(context).scaffoldBackgroundColor,
                       ),
-                    ],
-                    color: isMe
-                        ? Theme.of(context).primaryColor
-                        : Theme.of(context).scaffoldBackgroundColor,
-                  ),
-                  alignment:
-                      isMe ? Alignment.centerRight : Alignment.centerLeft,
-                  child: Padding(
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.end,
-                      children: <Widget>[
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
+                      alignment:
+                          isMe ? Alignment.centerRight : Alignment.centerLeft,
+                      child: Padding(
+                        padding: const EdgeInsets.all(8),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.end,
                           children: <Widget>[
-                            if (message.attachment.isNotEmpty)
-                              AttachmentMessageTile(
-                                isMe: isMe,
-                                borderRadius: borderRadius,
-                                attachments: message.attachment,
-                              ),
-                            if (message.text != null &&
-                                message.text!.isNotEmpty)
-                              ConstrainedBox(
-                                constraints: BoxConstraints(
-                                  maxWidth:
-                                      MediaQuery.of(context).size.width * 0.70,
-                                  minWidth: 100,
-                                ),
-                                child: Padding(
-                                  padding:
-                                      const EdgeInsets.symmetric(vertical: 2),
-                                  child: SelectableText(
-                                    message.text ?? 'no message',
-                                    textAlign: TextAlign.left,
-                                    style: isMe
-                                        ? const TextStyle(color: Colors.black)
-                                        : null,
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: <Widget>[
+                                if (message.attachment.isNotEmpty)
+                                  AttachmentMessageTile(
+                                    isMe: isMe,
+                                    borderRadius: borderRadius,
+                                    attachments: message.attachment,
                                   ),
-                                ),
-                              ),
+                                if (message.text != null &&
+                                    message.text!.isNotEmpty)
+                                  ConstrainedBox(
+                                    constraints: BoxConstraints(
+                                      maxWidth:
+                                          MediaQuery.of(context).size.width *
+                                              0.70,
+                                      minWidth: 100,
+                                    ),
+                                    child: Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          vertical: 2),
+                                      child: SelectableText(
+                                        message.text ?? 'no message',
+                                        textAlign: TextAlign.left,
+                                        style: isMe
+                                            ? const TextStyle(
+                                                color: Colors.white)
+                                            : null,
+                                      ),
+                                    ),
+                                  ),
+                              ],
+                            ),
                           ],
                         ),
-                        Text(
-                          DateFunctions.timeInDigits(message.time),
-                          style: const TextStyle(color: Colors.grey),
-                        )
-                      ],
+                      ),
                     ),
                   ),
-                ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 8),
+                    child: Text(
+                      DateFunctions.timeInDigits(message.time),
+                      style: const TextStyle(color: Colors.grey, fontSize: 11),
+                    ),
+                  ),
+                ],
               ),
             ],
           );
