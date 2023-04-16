@@ -48,41 +48,34 @@ class MessageTile extends StatelessWidget {
                       child: Padding(
                         padding: const EdgeInsets.all(8),
                         child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.end,
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: <Widget>[
-                                if (message.attachment.isNotEmpty)
-                                  AttachmentMessageTile(
-                                    isMe: isMe,
-                                    borderRadius: borderRadius,
-                                    attachments: message.attachment,
+                            if (message.attachment.isNotEmpty)
+                              AttachmentMessageTile(
+                                isMe: isMe,
+                                borderRadius: borderRadius,
+                                attachments: message.attachment,
+                              ),
+                            if (message.text != null &&
+                                message.text!.isNotEmpty)
+                              ConstrainedBox(
+                                constraints: BoxConstraints(
+                                  maxWidth:
+                                      MediaQuery.of(context).size.width * 0.70,
+                                  minWidth: 100,
+                                ),
+                                child: Padding(
+                                  padding:
+                                      const EdgeInsets.symmetric(vertical: 2),
+                                  child: SelectableText(
+                                    message.text ?? 'no message',
+                                    textAlign: TextAlign.left,
+                                    style: isMe
+                                        ? const TextStyle(color: Colors.white)
+                                        : null,
                                   ),
-                                if (message.text != null &&
-                                    message.text!.isNotEmpty)
-                                  ConstrainedBox(
-                                    constraints: BoxConstraints(
-                                      maxWidth:
-                                          MediaQuery.of(context).size.width *
-                                              0.70,
-                                      minWidth: 100,
-                                    ),
-                                    child: Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                          vertical: 2),
-                                      child: SelectableText(
-                                        message.text ?? 'no message',
-                                        textAlign: TextAlign.left,
-                                        style: isMe
-                                            ? const TextStyle(
-                                                color: Colors.white)
-                                            : null,
-                                      ),
-                                    ),
-                                  ),
-                              ],
-                            ),
+                                ),
+                              ),
                           ],
                         ),
                       ),

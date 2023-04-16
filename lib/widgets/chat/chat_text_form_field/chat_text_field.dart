@@ -106,10 +106,12 @@ class _ChatTextFieldState extends State<ChatTextField> {
             children: <Widget>[
               IconButton(
                 onPressed: () {},
+                splashRadius: 2,
                 icon: const Icon(CupertinoIcons.camera),
               ),
               IconButton(
                 onPressed: () {},
+                splashRadius: 2,
                 icon: const Icon(Icons.attach_file_sharp),
               ),
               Expanded(
